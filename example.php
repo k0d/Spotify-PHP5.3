@@ -10,4 +10,4 @@ $artist='winnerbäck';
 
 var_dump($spotify->searchArtist($artist));
 
-var_dump(phpSpotify\Spotify::searchArtist($artist));
+var_dump(phpSpotify\Spotify::searchArtist($artist,1,'JSON'));
