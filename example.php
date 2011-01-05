@@ -4,10 +4,15 @@ header('Content-type: text/plain; charset=UTF-8');
 
 require_once 'src/phpSpotify/Spotify.php';
 
-$spotify = new phpSpotify\Spotify();
-
+$apiversion=1;
+$spotifyurl='http://ws.spotify.com/';
 $artist='winnerbäck';
+$albumuri='spotify:album:6G9fHYDCoyEErUkHrFYfs4';
 
-var_dump($spotify->searchArtist($artist));
+$spotify = new phpSpotify\Spotify($spotifyurl,$apiversion);
 
-var_dump(phpSpotify\Spotify::searchArtist($artist,1,'JSON'));
+$spotify->lookup($albumuri);
+var_dump($spotify->results()->info);
+
+$spotify->searchArtist($artist);
+var_dump($spotify->results()->info);
