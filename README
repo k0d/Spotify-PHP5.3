@@ -1,12 +1,15 @@
 Spotify-PHP5.3
 ----------
 
-Description: Spotify-PHP5.3 is a library written in PHP, targeted for version 5.3, for connecting to the Spotify Metadata API.
+DESCRIPTION: Spotify-PHP5.3 is a library written in PHP, targeted for version
+ 5.3, for connecting to the Spotify Metadata API.
 
-Author: Lead Developer - Mark Andrews (mark@awdjo.com)
+AUTHOR: Lead Developer - Mark Andrews (mark@awdjo.com)
 
-License:
-By using this library, you agree to abide by the license available from the github repository http://github.com/onamali/Spotify-PHP5.3
+LICENSE:
+By using this library, you agree to abide by the license available from the
+github repository http://github.com/onamali/Spotify-PHP5.3
 
-Disclaimer:
-This product uses a SPOTIFY API but is not endorsed, certified or otherwise approved in any way by Spotify. Spotify is the registered trade mark of the Spotify Group.
+This product uses a SPOTIFY API but is not endorsed, certified or otherwise
+approved in any way by Spotify. Spotify is the registered trade mark of the
+Spotify Group.
