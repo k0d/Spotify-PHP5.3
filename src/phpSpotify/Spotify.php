@@ -2,13 +2,16 @@
 
 namespace phpSpotify;
 
+use phpSpotify\Service\Search;
+use phpSpotify\SpotifyException;
+
+require_once dirname(__FILE__).'/SpotifyException.php';
+
 /**
  * Main Spotify class
- * @author mark
+ * @author onamali
  *
  */
-use phpSpotify\Service\Search;
-
 class Spotify {
 	
 	const SPOTIFYURL = 'http://ws.spotify.com/';
@@ -17,7 +20,6 @@ class Spotify {
 	
 	protected $spotifyurl;
 	protected $apiversion;
-	protected $results;
 	
 	public function __construct($spotifyurl=self::SPOTIFYURL,$apiversion=self::DEFAULTSPOTIFYAPIVERSION) {
 		$this->apiversion=$apiversion;
@@ -40,24 +42,16 @@ class Spotify {
     	$serviceclassname='phpSpotify\Service\\'.$servicename;
     	if(is_readable($servicefilename)) {
     		require_once($servicefilename);
+    	}else{
+    		throw new SpotifyException('Service "'.$servicename.'" Not Found');
+    		return false;
     	}
     	if(class_exists($serviceclassname)) {
 	    	$request=new $serviceclassname($method,$arguments);
 	    	return $this->request($request);
     	}else{
+    		throw new SpotifyException('Service "'.$servicename.'" Not Found');
     		return false;
-    	}
-    }
-    
-    /**
-     * Returns the results if set otherwise raises exception and returns false
-     * @return boolean|mixed
-     */
-    public function results() {
-    	if(is_null($this->results)) {
-    		return false;
-    	}else{
-    		return $this->results;
     	}
     }
     
@@ -76,8 +70,7 @@ class Spotify {
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		
-        $this->results=json_decode(curl_exec($curl));
-        return true;
+        return json_decode(curl_exec($curl));
     }
     
 }
