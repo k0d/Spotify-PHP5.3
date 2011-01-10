@@ -7,6 +7,20 @@ class Search {
 	protected $name='search';
 	protected $params;
 	protected $method;
+	protected $methods=array(
+		'album'=>array(
+			'q'=>TRUE,
+			'page'=>FALSE,
+		),
+		'artist'=>array(
+			'q'=>TRUE,
+			'page'=>FALSE,
+		),
+		'track'=>array(
+			'q'=>TRUE,
+			'page'=>FALSE,
+		),
+	);
 	
 	public function __construct($method,$params) {
 		$this->method=$method;

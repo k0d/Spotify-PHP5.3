@@ -2,10 +2,13 @@
 
 namespace phpSpotify;
 
+use phpSpotify\Model\Results;
+
 use phpSpotify\Service\Search;
 use phpSpotify\SpotifyException;
 
 require_once dirname(__FILE__).'/SpotifyException.php';
+require_once dirname(__FILE__).'/Model/Results.php';
 
 /**
  * Main Spotify class
@@ -43,14 +46,17 @@ class Spotify {
     	if(is_readable($servicefilename)) {
     		require_once($servicefilename);
     	}else{
-    		throw new SpotifyException('Service "'.$servicename.'" Not Found');
+    		throw new SpotifyException('Service "'.$servicename.'" Not Found.');
     		return false;
     	}
     	if(class_exists($serviceclassname)) {
 	    	$request=new $serviceclassname($method,$arguments);
-	    	return $this->request($request);
+	    	$rawresults=$this->request($request);
+	    	$results=new Results();
+	    	$results->parseRaw($rawresults);
+	    	return $results;
     	}else{
-    		throw new SpotifyException('Service "'.$servicename.'" Not Found');
+    		throw new SpotifyException('Service "'.$servicename.'" Not Found.');
     		return false;
     	}
     }
