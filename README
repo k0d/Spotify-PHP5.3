@@ -13,3 +13,9 @@ github repository http://github.com/onamali/Spotify-PHP5.3
 This product uses a SPOTIFY API but is not endorsed, certified or otherwise
 approved in any way by Spotify. Spotify is the registered trade mark of the
 Spotify Group.
+
+TODO:
+Implement caching
+Call MODEL code when parent MODEL contains children - e.g. Album contains tracks
+Ensure all available API data is parsed - e.g. external-ids
+Better error handling
