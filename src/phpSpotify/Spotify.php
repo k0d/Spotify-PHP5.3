@@ -50,9 +50,14 @@ class Spotify {
     	if(class_exists($serviceclassname)) {
 	    	$request=new $serviceclassname($method,$arguments);
 	    	$rawresults=$this->request($request);
-	    	$results=new Results();
-	    	$results->parseRaw($rawresults);
-	    	return $results;
+	    	if(is_null($rawresults)) {
+	    		throw new SpotifyException('Unable to connect to the Spotify Metadata API.');
+	    		return false;
+	    	}else{
+		    	$results=new Results();
+		    	$results->parseRaw($rawresults);
+		    	return $results;
+	    	}
     	}else{
     		throw new SpotifyException('Service "'.$servicename.'" Not Found.');
     		return false;
