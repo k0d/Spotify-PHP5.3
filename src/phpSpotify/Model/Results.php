@@ -93,12 +93,6 @@ class Results {
 			}else{
 		    	$modelfilename=dirname(__FILE__).'/'.$modelname.'.php';
 		    	$modelclassname='phpSpotify\Model\\'.$modelname;
-		    	if(is_readable($modelfilename)) {
-		    		require_once($modelfilename);
-		    	}else{
-		    		throw new SpotifyException('Function "'.$name.'" Not Found.');
-		    		return false;
-		    	}
 		    	if(class_exists($modelclassname)) {
 		    		if($resultsisarray) {
 		    			$models=array();

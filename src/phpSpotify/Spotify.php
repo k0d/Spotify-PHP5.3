@@ -7,9 +7,6 @@ use phpSpotify\Model\Results;
 use phpSpotify\Service\Search;
 use phpSpotify\SpotifyException;
 
-require_once dirname(__FILE__).'/SpotifyException.php';
-require_once dirname(__FILE__).'/Model/Results.php';
-
 /**
  * Main Spotify class
  * @author onamali
@@ -27,8 +24,16 @@ class Spotify {
 	public function __construct($spotifyurl=self::SPOTIFYURL,$apiversion=self::DEFAULTSPOTIFYAPIVERSION) {
 		$this->apiversion=$apiversion;
 		$this->spotifyurl=$spotifyurl;
+		spl_autoload_register(__NAMESPACE__ .'\Spotify::autoload');
     }
     
+   	static protected function autoload($class) {
+    	$filename=dirname(__FILE__).'/'.str_replace('phpSpotify/', '', str_replace('\\','/',$class)).'.php';
+    	if(file_exists($filename)) {
+	        require_once($filename);
+	    }
+	}
+	
     /**
      * Tries to make an api call depending on method name
      * @param string $name
@@ -41,14 +46,7 @@ class Spotify {
     	$method=(isset($call[1])?$call[1]:null);
     	
     	$servicename=ucfirst(strtolower($service));
-    	$servicefilename=dirname(__FILE__).'/Service/'.$servicename.'.php';
     	$serviceclassname='phpSpotify\Service\\'.$servicename;
-    	if(is_readable($servicefilename)) {
-    		require_once($servicefilename);
-    	}else{
-    		throw new SpotifyException('Service "'.$servicename.'" Not Found.');
-    		return false;
-    	}
     	if(class_exists($serviceclassname)) {
 	    	$request=new $serviceclassname($method,$arguments);
 	    	$rawresults=$this->request($request);

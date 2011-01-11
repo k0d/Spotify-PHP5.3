@@ -2,7 +2,7 @@
 
 namespace phpSpotify\Service;
 
-class Lookup {
+class Lookup extends Base{
 	
 	protected $name='lookup';
 	protected $params;
@@ -15,12 +15,5 @@ class Lookup {
     		'extras'=>(isset($params[1])?$params[1]:'')
     	);
 	}
-	
-    public function __get($varname) {
-    	if(isset($this->$varname)) {
-    		return $this->$varname;
-    	}
-    	return null;
-    }
 	
 }

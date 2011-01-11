@@ -2,11 +2,9 @@
 
 namespace phpSpotify\Service;
 
-class Search {
+class Search extends Base{
 	
 	protected $name='search';
-	protected $params;
-	protected $method;
 	protected $methods=array(
 		'album'=>array(
 			'q'=>TRUE,
@@ -29,12 +27,5 @@ class Search {
     		'page'=>(isset($params[1])?$params[1]:1)
     	);
 	}
-	
-    public function __get($varname) {
-    	if(isset($this->$varname)) {
-    		return $this->$varname;
-    	}
-    	return null;
-    }
 	
 }
