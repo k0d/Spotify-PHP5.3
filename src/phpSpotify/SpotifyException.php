@@ -7,4 +7,5 @@ namespace phpSpotify;
  * @author onamali
  *
  */
-class SpotifyException extends \Exception { }
+class SpotifyException extends \Exception {
+}
